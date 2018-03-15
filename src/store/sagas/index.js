@@ -16,7 +16,7 @@ import {
   purchaseBurgerSaga, 
   fetchOrderSaga
 } from './order';
-import { takeLatest } from "redux-saga";
+import { takeLatest } from "redux-saga/effects";
 
 export function* watchAuth() {
   yield all([

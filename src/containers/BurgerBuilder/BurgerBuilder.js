@@ -12,10 +12,6 @@ import * as actions from '../../store/actions/index';
 import axios from '../../axios-orders';
 
 export class BurgerBuilder extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {...}
-    // }
     state = {
         purchasing: false
     }
@@ -61,7 +57,9 @@ export class BurgerBuilder extends Component {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
         let orderSummary = null;
-        let burger = this.props.error ? <p>Ingredients can't be loaded!</p> : <Spinner />;
+        let burger = this.props.error 
+            ? <p style={{textAlign: 'center'}}>Ingredients can't be loaded!</p> 
+            : <Spinner />;
 
         if ( this.props.ings ) {
             burger = (
