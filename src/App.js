@@ -21,11 +21,26 @@ const asyncAuth = asyncComponent(() => {
 });
 
 class App extends Component {
+  state = {
+    online: navigator.onLine
+  }
+
   componentDidMount () {
-    this.props.onTryAutoSignup();
+    this.eventOnline  = window.addEventListener('online', () => this.setState({ online: true }));
+    this.eventOffline = window.addEventListener('offline', () => this.setState({ online: false }));
+
+    this.state.online && this.props.onTryAutoSignup();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(this.eventOnline)
+    window.removeEventListener(this.eventOffline)
   }
 
   render () {
+    this.state.online ? console.log('Online') : console.log('Offline')
+
+
     let routes = (
       <Switch>
         <Route path="/auth" component={asyncAuth} />
